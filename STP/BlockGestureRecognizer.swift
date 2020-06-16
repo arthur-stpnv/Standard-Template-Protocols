@@ -20,25 +20,25 @@ extension UIGestureRecognizer {
         static var multiDelegateKey = "BCMultiDelegateKey"
     }
 
-    private var block:((recognizer:UIGestureRecognizer) -> Void) {
+    private var block:((_ recognizer:UIGestureRecognizer) -> Void) {
         get {
-            return Associator.getAssociatedObject(self, associativeKey:&PropertyKeys.blockKey)!
+            return Associator.getAssociatedObject(object: self, associativeKey:&PropertyKeys.blockKey)!
         }
         set {
-            Associator.setAssociatedObject(self, value: newValue, associativeKey:&PropertyKeys.blockKey, policy: .OBJC_ASSOCIATION_RETAIN)
+            Associator.setAssociatedObject(object: self, value: newValue, associativeKey:&PropertyKeys.blockKey, policy: .OBJC_ASSOCIATION_RETAIN)
         }
     }
 
     private var multiDelegate:MultiDelegate {
         get {
-            return Associator.getAssociatedObject(self, associativeKey:&PropertyKeys.multiDelegateKey)!
+            return Associator.getAssociatedObject(object: self, associativeKey:&PropertyKeys.multiDelegateKey)!
         }
         set {
-            Associator.setAssociatedObject(self, value: newValue, associativeKey:&PropertyKeys.multiDelegateKey, policy: .OBJC_ASSOCIATION_RETAIN)
+            Associator.setAssociatedObject(object: self, value: newValue, associativeKey:&PropertyKeys.multiDelegateKey, policy: .OBJC_ASSOCIATION_RETAIN)
         }
     }
 
-    convenience init(block:(recognizer:UIGestureRecognizer) -> Void) {
+    convenience init(block:@escaping (_ recognizer:UIGestureRecognizer) -> Void) {
         self.init()
         self.block = block
         self.multiDelegate = MultiDelegate()
@@ -47,6 +47,6 @@ extension UIGestureRecognizer {
     }
 
     @objc func didInteractWithGestureRecognizer(sender:UIGestureRecognizer) {
-        self.block(recognizer: sender)
+        self.block(sender)
     }
 }

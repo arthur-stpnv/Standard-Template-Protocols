@@ -22,23 +22,23 @@ public extension Moveable where Self:UIView {
 
     func makeMoveable() {
 
-        var startPoint:CGPoint = CGPointZero
-        var currentPoint:CGPoint = CGPointZero
+        var startPoint:CGPoint = CGPoint.zero
+        var currentPoint:CGPoint = CGPoint.zero
 
         let gestureRecognizer = UIPanGestureRecognizer { [unowned self] (recognizer) -> Void in
             let pan = recognizer as! UIPanGestureRecognizer
-            let velocity = pan.velocityInView(self.superview)
-            let translation = pan.translationInView(self.superview)
+            let velocity = pan.velocity(in: self.superview)
+            let translation = pan.translation(in: self.superview)
             switch recognizer.state {
-            case .Began:
+            case .began:
                 startPoint = self.center
                 currentPoint = self.center
                 self.didStartMoving()
-            case .Ended, .Cancelled, .Failed:
-                self.didFinishMoving(velocity)
+            case .ended, .cancelled, .failed:
+                self.didFinishMoving(velocity: velocity)
             default:
-                let point = self.translateCenter(translation, velocity:velocity, startPoint: startPoint, currentPoint: currentPoint)
-                self.animateToMovedTransform(self.transformFromCenter(point, currentPoint: currentPoint))
+                let point = self.translateCenter(translation: translation, velocity:velocity, startPoint: startPoint, currentPoint: currentPoint)
+                self.animateToMovedTransform(transform: self.transformFromCenter(center: point, currentPoint: currentPoint))
                 currentPoint = point
             }
         }
@@ -46,7 +46,7 @@ public extension Moveable where Self:UIView {
     }
 
     func animateToMovedTransform(transform:CGAffineTransform) {
-        UIView.animateWithDuration(0.01) { () -> Void in
+        UIView.animate(withDuration: 0.01) { () -> Void in
             self.transform = transform;
         }
     }
@@ -54,13 +54,13 @@ public extension Moveable where Self:UIView {
     func translateCenter(translation:CGPoint, velocity:CGPoint, startPoint:CGPoint, currentPoint:CGPoint) -> CGPoint {
         var point = startPoint
 
-        if (self.canMoveToX(point.x + translation.x)) {
+        if (self.canMoveToX(x: point.x + translation.x)) {
             point.x += translation.x
         } else {
             point.x = translation.x > 0.0 ? maximumPoint().x : minimumPoint().x
         }
 
-        if (self.canMoveToY(point.y + translation.y)) {
+        if (self.canMoveToY(y: point.y + translation.y)) {
             point.y += translation.y
         } else {
             point.y = translation.y > 0.0 ? maximumPoint().y : minimumPoint().y
@@ -70,7 +70,7 @@ public extension Moveable where Self:UIView {
     }
 
     func transformFromCenter(center:CGPoint, currentPoint:CGPoint) -> CGAffineTransform {
-        return CGAffineTransformTranslate(self.transform, center.x - currentPoint.x , center.y - currentPoint.y)
+        return self.transform.translatedBy(x: center.x - currentPoint.x , y: center.y - currentPoint.y)
     }
 
     func didStartMoving() {
@@ -111,7 +111,7 @@ public extension Moveable where Self:UIView {
         if let superviewFrame = self.superview?.frame {
             let x = superviewFrame.size.width - self.frame.size.width / 2.0
             let y = superviewFrame.size.height - self.frame.size.height / 2.0
-            return CGPointMake(x, y)
+            return CGPoint(x: x, y: y)
         } else {
             return CGPoint.zero
         }
@@ -120,6 +120,6 @@ public extension Moveable where Self:UIView {
     func minimumPoint() -> CGPoint {
         let x = self.frame.size.width / 2.0
         let y = self.frame.size.height / 2.0
-        return CGPointMake(x, y)
+        return CGPoint(x: x, y: y)
     }
 }

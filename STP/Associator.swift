@@ -26,7 +26,7 @@ class Associator {
             objc_setAssociatedObject(object, associativeKey, v,  policy)
         }
         else {
-            objc_setAssociatedObject(object, associativeKey, wrap(value),  policy)
+            objc_setAssociatedObject(object, associativeKey, wrap(x: value),  policy)
         }
     }
 

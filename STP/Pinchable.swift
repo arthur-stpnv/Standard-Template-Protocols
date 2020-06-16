@@ -26,17 +26,17 @@ public extension Pinchable where Self:UIView {
         let gestureRecognizer = UIPinchGestureRecognizer { [unowned self] (recognizer) -> Void in
             let pinch = recognizer as! UIPinchGestureRecognizer
             switch pinch.state {
-            case .Began:
+            case .began:
                 self.didStartPinching()
-            case .Ended:
+            case .ended:
                 self.didFinishPinching()
                 lastScale = 1.0
-            case .Changed:
+            case .changed:
                 let scale = pinch.scale
                 let velocity = pinch.velocity
-                let transform = self.transformWithScale(scale, lastScale: lastScale, velocity:velocity)
+                let transform = self.transformWithScale(scale: scale, lastScale: lastScale, velocity:velocity)
                 lastScale = scale
-                self.animateToPinchedTransform(transform)
+                self.animateToPinchedTransform(transform: transform)
             default:
                 break
             }
@@ -62,11 +62,11 @@ public extension Pinchable where Self:UIView {
 
     func transformWithScale(scale:CGFloat, lastScale:CGFloat, velocity:CGFloat) -> CGAffineTransform {
         let updatedScale = 1.0 - (lastScale - scale)
-        return CGAffineTransformScale(self.transform, updatedScale, updatedScale)
+        return self.transform.scaledBy(x: updatedScale, y: updatedScale)
     }
 
     func animateToPinchedTransform(transform:CGAffineTransform) {
-        UIView.animateWithDuration(0.01) { () -> Void in
+        UIView.animate(withDuration: 0.01) { () -> Void in
             self.transform = transform
         }
     }

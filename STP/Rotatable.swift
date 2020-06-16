@@ -26,14 +26,14 @@ public extension Rotatable where Self:UIView {
             let rotation = recognizer as! UIRotationGestureRecognizer
             let velocity = rotation.velocity
             switch rotation.state {
-            case .Began:
+            case .began:
                 self.didStartRotating()
                 lastRotation = 0.0
-            case .Ended:
-                self.didFinishRotating(velocity)
-            case .Changed:
-                let transform = self.transformWithRotation(rotation.rotation, lastRotation: lastRotation, velocity:velocity)
-                self.animateToRotatedTransform(transform)
+            case .ended:
+                self.didFinishRotating(velocity: velocity)
+            case .changed:
+                let transform = self.transformWithRotation(rotation: rotation.rotation, lastRotation: lastRotation, velocity:velocity)
+                self.animateToRotatedTransform(transform: transform)
                 lastRotation = rotation.rotation
             default:
                 break
@@ -44,21 +44,21 @@ public extension Rotatable where Self:UIView {
 
     func transformWithRotation(rotation:CGFloat, lastRotation:CGFloat, velocity:CGFloat) -> CGAffineTransform {
         let angle = rotation - lastRotation
-        return CGAffineTransformRotate(self.transform, angle)
+        return self.transform.rotated(by: angle)
     }
 
     func animateToRotatedTransform(transform:CGAffineTransform) {
-        UIView.animateWithDuration(0.0) { () -> Void in
+        UIView.animate(withDuration: 0.0) { () -> Void in
             self.transform = transform
         }
     }
 
     func minimumRotation() -> CGFloat {
-        return CGFloat.max
+        return CGFloat.greatestFiniteMagnitude
     }
 
     func maximumRotation() -> CGFloat {
-        return CGFloat.min
+        return CGFloat.leastNormalMagnitude
     }
 
     func didStartRotating() {

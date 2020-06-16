@@ -13,7 +13,7 @@ public protocol Tappable {
     func didTap()
     func didTouchDown()
     func didTouchUp()
-    func minimumPressDuration() -> NSTimeInterval
+    func minimumPressDuration() -> TimeInterval
     func allowableMovement() -> CGFloat
 }
 
@@ -25,29 +25,28 @@ public extension Tappable where Self:UIView {
             let tap = recognizer as! UILongPressGestureRecognizer
 
             func isInFrame() -> Bool {
-                return CGRectContainsPoint(
-                  CGRectInset(self.frame, self.frame.width * -0.5, self.frame.height * -0.5),
-                  recognizer.locationInView(self)
+                return self.frame.insetBy(dx: self.frame.width * -0.5, dy: self.frame.height * -0.5).contains(
+                    recognizer.location(in: self)
                 )
             }
 
             switch tap.state {
-            case .Began:
+            case .began:
                 self.didTouchDown()
-            case .Ended:
+            case .ended:
                 self.didTouchUp()
                 if isInFrame() {
                     self.didTap()
                 }
-            case .Failed, .Cancelled:
+            case .failed, .cancelled:
                 self.didTouchUp()
-            case .Changed:
+            case .changed:
                 if isInFrame() {
                     self.didTouchDown()
                 } else {
                     self.didTouchUp()
                 }
-            case .Possible: break
+            case .possible: break
             }
         }
 
@@ -68,7 +67,7 @@ public extension Tappable where Self:UIView {
         self.alpha = 1.0
     }
 
-    func minimumPressDuration() -> NSTimeInterval {
+    func minimumPressDuration() -> TimeInterval {
         return 0.001
     }
 

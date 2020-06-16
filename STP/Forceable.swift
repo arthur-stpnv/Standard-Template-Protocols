@@ -22,13 +22,13 @@ public extension Forceable where Self:UIView {
         let gestureRecognizer = ForceTouchGestureRecognizer { [unowned self] (recognizer) -> Void in
             let force = recognizer as! ForceTouchGestureRecognizer
             switch force.state {
-            case .Began:
+            case .began:
                 lastForce = 1.0
-                self.didStartForcing(force.force)
-            case .Ended, .Failed, .Cancelled:
-                self.didFinishForcing(force.force)
+                self.didStartForcing(force: force.force)
+            case .ended, .failed, .cancelled:
+                self.didFinishForcing(force: force.force)
             default:
-                self.didForce(force.force, lastForce: lastForce)
+                self.didForce(force: force.force, lastForce: lastForce)
                 lastForce = force.force
             }
         }
