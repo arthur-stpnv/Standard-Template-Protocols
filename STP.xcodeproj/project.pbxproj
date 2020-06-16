@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D30117C1BD4095800AAD5EC /* Forceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30117B1BD4095800AAD5EC /* Forceable.swift */; settings = {ASSET_TAGS = (); }; };
-		9D30117E1BD40B6900AAD5EC /* ForceTouchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30117D1BD40B6900AAD5EC /* ForceTouchGestureRecognizer.swift */; settings = {ASSET_TAGS = (); }; };
+		9D30117C1BD4095800AAD5EC /* Forceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30117B1BD4095800AAD5EC /* Forceable.swift */; };
+		9D30117E1BD40B6900AAD5EC /* ForceTouchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D30117D1BD40B6900AAD5EC /* ForceTouchGestureRecognizer.swift */; };
 		9DE7FAB21BCCD7A8002E7652 /* STP.h in Headers */ = {isa = PBXBuildFile; fileRef = 9DE7FAB11BCCD7A8002E7652 /* STP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9DE7FABC1BCCD7C7002E7652 /* Associator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABA1BCCD7C7002E7652 /* Associator.swift */; settings = {ASSET_TAGS = (); }; };
-		9DE7FABD1BCCD7C7002E7652 /* BlockGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABB1BCCD7C7002E7652 /* BlockGestureRecognizer.swift */; settings = {ASSET_TAGS = (); }; };
-		9DE7FAC11BCCD7CE002E7652 /* Moveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABE1BCCD7CE002E7652 /* Moveable.swift */; settings = {ASSET_TAGS = (); }; };
-		9DE7FAC21BCCD7CE002E7652 /* Pinchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABF1BCCD7CE002E7652 /* Pinchable.swift */; settings = {ASSET_TAGS = (); }; };
-		9DE7FAC31BCCD7CE002E7652 /* Rotatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FAC01BCCD7CE002E7652 /* Rotatable.swift */; settings = {ASSET_TAGS = (); }; };
-		9DE7FAC51BCCD7D3002E7652 /* Tappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FAC41BCCD7D3002E7652 /* Tappable.swift */; settings = {ASSET_TAGS = (); }; };
+		9DE7FABC1BCCD7C7002E7652 /* Associator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABA1BCCD7C7002E7652 /* Associator.swift */; };
+		9DE7FABD1BCCD7C7002E7652 /* BlockGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABB1BCCD7C7002E7652 /* BlockGestureRecognizer.swift */; };
+		9DE7FAC11BCCD7CE002E7652 /* Moveable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABE1BCCD7CE002E7652 /* Moveable.swift */; };
+		9DE7FAC21BCCD7CE002E7652 /* Pinchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FABF1BCCD7CE002E7652 /* Pinchable.swift */; };
+		9DE7FAC31BCCD7CE002E7652 /* Rotatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FAC01BCCD7CE002E7652 /* Rotatable.swift */; };
+		9DE7FAC51BCCD7D3002E7652 /* Tappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE7FAC41BCCD7D3002E7652 /* Tappable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,6 +136,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 9DE7FAA41BCCD7A8002E7652;
@@ -282,6 +283,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -300,6 +302,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = because.STP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
